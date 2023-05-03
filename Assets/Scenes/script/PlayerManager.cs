@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     //プレイヤーの移動速度
-    private int MoveSpeed = 18;
+    private int MoveSpeed = 12;
     //ゲームオブジェクトを取得
     public GameObject BulletPrehab;
     public GameObject FiringPosition;
@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     //スペースを押すと弾が発射される
     private void Shot()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Z))
         {             
             Instantiate(BulletPrehab,
                     FiringPosition.transform.position,
