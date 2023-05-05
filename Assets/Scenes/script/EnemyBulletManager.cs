@@ -4,35 +4,60 @@ using UnityEngine;
 
 public class EnemyBulletManager : MonoBehaviour
 {
-    private int BulletSpeed = 1;
+    public OmniBullet m_shotPrefab; // 弾のプレハブ
+    public float m_shotSpeed; // 弾の移動の速さ
+    public float m_shotAngleRange; // 複数の弾を発射する時の角度
+    public float m_shotTimer; // 弾の発射タイミングを管理するタイマー
+    public int m_shotCount; // 弾の発射数
+    public float m_shotInterval; // 弾の発射間隔（秒）
 
-    private void Start()
+    private void Update()
     {
-       
+        // 弾の発射タイミングを管理するタイマーを更新する
+        m_shotTimer += Time.deltaTime;
+
+        // まだ弾の発射タイミングではない場合は、ここで処理を終える
+        if ( m_shotTimer < m_shotInterval ) return;
+
+        // 弾の発射タイミングを管理するタイマーをリセットする
+        m_shotTimer = 0;
+
+        // 弾を発射する
+        ShootNWay( 180, m_shotAngleRange, m_shotSpeed, m_shotCount );
+        
     }
+    // 弾を発射する関数
+    private void ShootNWay( 
+    float angleBase, float angleRange, float speed, int count )
+{
+    var pos = transform.localPosition; // プレイヤーの位置
+    var rot = transform.localRotation; // プレイヤーの向き
 
-
-    void Update()
+    // 弾を複数発射する場合
+    if ( 1 < count )
     {
-         Move();
-        OFFScrean();
-    }
-
-    private void Move()
-    {
-        if(this.transform.position.x<6.2)
+        // 発射する回数分ループする
+        for ( int i = 0; i < count; ++i )
         {
-             transform.position += new Vector3(-BulletSpeed, 0, 0) * Time.deltaTime;
+            // 弾の発射角度を計算する
+            var angle = angleBase + 
+                angleRange * ( ( float )i / ( count - 1 ) - 0.5f );
 
+            // 発射する弾を生成する
+            var shot = Instantiate( m_shotPrefab, pos, rot );
+
+            // 弾を発射する方向と速さを設定する
+            shot.Init( angle, speed );
         }
-       
     }
-    //Bulletが消えるプログラム
-    private void OFFScrean()
+    // 弾を 1 つだけ発射する場合
+    else if ( count == 1 )
     {
-        if (this.transform.position.x < -9.0f)
-        {
-            Destroy(this.gameObject);
-        }
+        // 発射する弾を生成する
+        var shot = Instantiate( m_shotPrefab, pos, rot );
+
+        // 弾を発射する方向と速さを設定する
+        shot.Init( angleBase, speed );
     }
+}
 }

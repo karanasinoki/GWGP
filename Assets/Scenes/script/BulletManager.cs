@@ -26,4 +26,8 @@ public class BulletManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    //’e‚Æ“G‚ªÁ–Å‚·‚é
+
+    
 }
