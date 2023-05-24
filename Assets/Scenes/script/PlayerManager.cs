@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
     {
         Move();
         ShiftSlow();
-        Shot();
+       // Shot();
     }
     //プレイヤーを移動させる関数
     private void Move()
@@ -50,19 +50,19 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    //スペースを押すと弾が発射される
-    private void Shot()
-    {
-        if(Input.GetKeyDown(KeyCode.Z))
-        {             
-            Instantiate(BulletPrehab,
-                    FiringPosition.transform.position,
-                    transform.rotation);
+    //Zを押すと弾が固定される
+    //private void Shot()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Z))
+    //    {
+    //        Instantiate(BulletPrehab,
+    //                FiringPosition.transform.position,
+    //                transform.rotation);
 
-        }
-        
-    }
+    //    }
 
-    
+    //}
+
+
 
 }

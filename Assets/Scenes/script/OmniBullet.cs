@@ -28,8 +28,7 @@ public class OmniBullet : MonoBehaviour
         angles.z = angle - 90;
         transform.localEulerAngles = angles;
 
-        // 2 ïbå„Ç…çÌèúÇ∑ÇÈ
-        Destroy( gameObject, 10 );
+      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

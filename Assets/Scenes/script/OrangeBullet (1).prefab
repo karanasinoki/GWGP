@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2359678031475016815}
   - component: {fileID: 2359678031475016800}
-  - component: {fileID: -6500157083800718176}
   - component: {fileID: -364298104390211222}
-  - component: {fileID: 2347714288980362201}
   m_Layer: 0
   m_Name: OrangeBullet (1)
   m_TagString: Bullet
@@ -87,18 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-6500157083800718176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2359678031475016801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0a1566c33b5d554cae418b67cfeb9e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &-364298104390211222
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,24 +101,3 @@ CircleCollider2D:
   m_Offset: {x: -0.002302289, y: 0}
   serializedVersion: 2
   m_Radius: 0.10050091
---- !u!50 &2347714288980362201
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2359678031475016801}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
