@@ -6,8 +6,9 @@ public class PManager : MonoBehaviour
 {
 
     public float moveSpeed = 10f;  // 移動速度
-    public float slowdownRate = 0.5f;  // 減速率
-    public float friction = 7f;  // 摩擦
+    public float acceleration = 10f;  // 加速度
+    public float deceleration = 10f;  // 減速度
+    public float maxSpeed = 10f;  // 最大速度
 
     private Rigidbody2D rb;
     private Vector2 movementInput;
@@ -33,33 +34,34 @@ public class PManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 移動速度を計算
-        float currentMoveSpeed = moveSpeed;
+        // 現在の速度を取得
+        Vector2 currentVelocity = rb.velocity;
 
-        // Shiftキーを押している場合は速度を減速
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        // 目標速度を計算
+        Vector2 targetVelocity = movementInput * moveSpeed;
+
+        // 加速度と減速度を適用
+        if (isMoving)
         {
-            currentMoveSpeed *= slowdownRate;
+            targetVelocity = Vector2.MoveTowards(currentVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+        }
+        else
+        {
+            targetVelocity = Vector2.MoveTowards(currentVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
         }
 
-        // 移動ベクトルを正規化して速度を適用
-        Vector2 moveVelocity = movementInput.normalized * currentMoveSpeed;
+        // 最大速度を制限
+        targetVelocity = Vector2.ClampMagnitude(targetVelocity, maxSpeed);
 
         // 画面外に行かないように制限
-        Vector2 clampedPosition = rb.position + moveVelocity * Time.fixedDeltaTime;
+        Vector2 clampedPosition = rb.position + targetVelocity * Time.fixedDeltaTime;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, -9f, 9f);
         clampedPosition.y = Mathf.Clamp(clampedPosition.y, -5f, 5f);
 
         // Rigidbody2Dに速度を適用
         rb.MovePosition(clampedPosition);
-
-        // 入力がない場合は速度を減速
-        if (!isMoving)
-        {
-            rb.velocity = rb.velocity * (1f - friction * Time.fixedDeltaTime);
-        }
+        rb.velocity = targetVelocity;
     }
-
 
 
 }

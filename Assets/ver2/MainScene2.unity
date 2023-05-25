@@ -411,8 +411,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234db673728564946b919deb45ff7ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  slowdownRate: 0.5
+  moveSpeed: 6
+  acceleration: 40
+  deceleration: 40
+  maxSpeed: 6
 --- !u!114 &1034918029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7777207724355135964, guid: 45465f2e55da374418a5af319598edbf, type: 3}
+  minDistance: 5
+  maxBulletCount: 3
 --- !u!1 &2097468962
 GameObject:
   m_ObjectHideFlags: 0
